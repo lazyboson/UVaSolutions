@@ -12,13 +12,10 @@
 using namespace std;
 // Powered by caide (code generator, tester, and library code inliner)
 
-bool is_lexical(string const &message)
-{
+bool is_lexical(string const &message) {
     char first = message[0];
-    for (int i = 1; i < message.size(); i++)
-    {
-        if (message[i] <= first)
-        {
+    for (int i = 1; i < message.size(); i++) {
+        if (message[i] <= first) {
             return true;
         }
         first = message[i];
@@ -26,18 +23,15 @@ bool is_lexical(string const &message)
     return false;
 }
 
-class Solution
-{
+class Solution {
 public:
-    void solve(std::istream &in, std::ostream &out)
-    {
+    void solve(std::istream &in, std::ostream &out) {
 
         //building the dictionary
         map<string, int> dictionary_mapper;
         int counter = 1;
         //first iteration
-        for (int i = 97; i <= 122; i++)
-        {
+        for (int i = 97; i <= 122; i++) {
             stringstream ss;
             ss << char(i);
             dictionary_mapper[ss.str()] = counter;
@@ -45,10 +39,8 @@ public:
         }
 
         //second iteration
-        for (int i = 97; i <= 122; i++)
-        {
-            for (int j = i + 1; j <= 122; j++)
-            {
+        for (int i = 97; i <= 122; i++) {
+            for (int j = i + 1; j <= 122; j++) {
                 stringstream ss;
                 ss << char(i) << char(j);
                 dictionary_mapper[ss.str()] = counter;
@@ -57,12 +49,9 @@ public:
         }
 
         //third iteration
-        for (int i = 97; i <= 122; i++)
-        {
-            for (int j = i + 1; j <= 122; j++)
-            {
-                for (int k = j + 1; k <= 122; k++)
-                {
+        for (int i = 97; i <= 122; i++) {
+            for (int j = i + 1; j <= 122; j++) {
+                for (int k = j + 1; k <= 122; k++) {
                     stringstream ss;
                     ss << char(i) << char(j) << char(k);
                     dictionary_mapper[ss.str()] = counter;
@@ -72,14 +61,10 @@ public:
         }
 
         //forth iteration
-        for (int i = 97; i <= 122; i++)
-        {
-            for (int j = i + 1; j <= 122; j++)
-            {
-                for (int k = j + 1; k <= 122; k++)
-                {
-                    for (int l = k + 1; l <= 122; l++)
-                    {
+        for (int i = 97; i <= 122; i++) {
+            for (int j = i + 1; j <= 122; j++) {
+                for (int k = j + 1; k <= 122; k++) {
+                    for (int l = k + 1; l <= 122; l++) {
                         stringstream ss;
 
                         ss << char(i) << char(j) << char(k) << char(l);
@@ -91,16 +76,11 @@ public:
         }
 
         //fifith iteration
-        for (int i = 97; i <= 122; i++)
-        {
-            for (int j = i + 1; j <= 122; j++)
-            {
-                for (int k = j + 1; k <= 122; k++)
-                {
-                    for (int l = k + 1; l <= 122; l++)
-                    {
-                        for (int m = l + 1; m <= 122; m++)
-                        {
+        for (int i = 97; i <= 122; i++) {
+            for (int j = i + 1; j <= 122; j++) {
+                for (int k = j + 1; k <= 122; k++) {
+                    for (int l = k + 1; l <= 122; l++) {
+                        for (int m = l + 1; m <= 122; m++) {
                             stringstream ss;
                             ss << char(i) << char(j) << char(k) << char(l) << char(m);
                             dictionary_mapper[ss.str()] = counter;
@@ -112,13 +92,11 @@ public:
         }
 
         std::string word;
-        while (in >> word)
-        {
+        while (in >> word) {
             bool lexical_status = is_lexical(word);
             if (lexical_status)
                 out << 0 << endl;
-            else
-            {
+            else {
                 //lookup in dictionary
                 auto ans = dictionary_mapper.find(word);
                 if (ans != dictionary_mapper.end())
@@ -128,8 +106,7 @@ public:
     }
 };
 
-void solve(std::istream &in, std::ostream &out)
-{
+void solve(std::istream &in, std::ostream &out) {
     out << std::setprecision(12);
     Solution solution;
     solution.solve(in, out);
@@ -138,8 +115,7 @@ void solve(std::istream &in, std::ostream &out)
 #include <fstream>
 #include <iostream>
 
-int main()
-{
+int main() {
 
     ios_base::sync_with_stdio(false);
     cin.tie(0);
