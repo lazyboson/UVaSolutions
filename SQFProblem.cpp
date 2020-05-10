@@ -21,12 +21,14 @@ public:
             int category;
             in >> category;
             vector<int> category_threshold;
+            vector<string> inorder;
             map<string, vector<string>> category_keywords;
             while (category--) {
                 string current_category_name;
                 int W, R;
                 in >> current_category_name >> W >> R;
                 category_threshold.push_back(R);
+                inorder.push_back(current_category_name);
                 for (int i = 0; i < W; i++) {
                     string keyword;
                     in >> keyword;
@@ -43,12 +45,11 @@ public:
             }
 
             //start processing on each category
-            int cnt = 0;
-            int ptr = 0;
+            int cnt = 0, ptr = 0;
             for (auto const &a : category_keywords) {
                 istringstream iss(sentence);
                 string current;
-                while (iss >> current && cnt < category_threshold[ptr]) {
+                while (iss >> current) {
                     //if current string have dot remove it from end since it can be at last place ony as per problem
                     if (find(current.begin(), current.end(), '.') != current.end())
                         current.pop_back();
@@ -65,14 +66,18 @@ public:
             }
             int present = 0;
             //printing in fancy style as required
-            if(ans.size())
-                out << "‘SQF Problem.";
-            for (auto const &v : ans) {
-                out << v;
-                present++;
-                if (present > 0 && present < ans.size())
-                    out << ",";
+            if (ans.empty())
+                out << "SQF Problem.";
+            for (auto const &in : inorder) { // NOLINT(clang-diagnostic-misleading-indentation)
+                auto p = find(ans.begin(), ans.end(), in);
+                if (p != ans.end()) {
+                    out << *p;
+                    present++;
+                    if (present > 0 && present < ans.size())
+                        out << ",";
+                }
             }
+            out << endl;
         }
     }
 };
