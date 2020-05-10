@@ -36,7 +36,7 @@ public:
             string line;
             vector<string> ans;
             string sentence;
-            //in.ignore();
+            in.ignore();
             while (getline(in, line) && !line.empty()) {
                 sentence += line;
                 sentence += " ";
@@ -65,13 +65,14 @@ public:
             }
             int present = 0;
             //printing in fancy style as required
+            if(ans.size())
+                out << "‘SQF Problem.";
             for (auto const &v : ans) {
                 out << v;
                 present++;
                 if (present > 0 && present < ans.size())
                     out << ",";
             }
-            out << endl;
         }
     }
 };
