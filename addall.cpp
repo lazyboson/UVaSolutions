@@ -4,6 +4,7 @@
 #include <map>
 #include <numeric>
 #include <ostream>
+#include <queue>
 #include <set>
 #include <sstream>
 #include <string>
@@ -15,22 +16,26 @@ using namespace std;
 class Solution {
 public:
     void solve(std::istream &in, std::ostream &out) {
-        int n, m;
-        while (in >> n && in >> m && n != 0 && m != 0) {
-            set<int> first_cd;
-            for (int i = 0; i < n; i++) {
-                int input;
-                in >> input;
-                first_cd.insert(input);
+        int n;
+        while (in >> n, n) {
+            priority_queue<int, vector<int>, greater<int>> heap;
+
+            while (n--) {
+                int x;
+                in >> x;
+                heap.push(x);
             }
-            int ans = 0;
-            for (int i = 0; i < m; i++) {
-                int input;
-                in >> input;
-                if (first_cd.find(input) != first_cd.end())
-                    ans++;
+            int total = 0, cost = 0;
+            while (heap.size() > 1) {
+                total = heap.top();
+                heap.pop();
+                total += heap.top();
+                heap.pop();
+                cost += total;
+                heap.push(total);
             }
-            out << ans << endl;
+
+            out << cost << endl;
         }
     }
 };
