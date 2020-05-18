@@ -16,16 +16,16 @@ static const char dummy = '$';
 
 class Solution {
 public:
-    void dfs(int i, vector<bool> &visited, bool &isAcron, bool &hasFound, const vector<int> adj[]) {
+    void dfs(int i, vector<bool> &visited, bool &isAcron, bool &isTree, const vector<int> adj[]) {
         visited[i] = true;
         for (auto u : adj[i]) {
             if (u == static_cast<int>(dummy)) {
                 isAcron = true;
                 return;
             }
-            hasFound = true;
+            isTree = true;
             if (visited[u] == false)
-                dfs(u, visited, isAcron, hasFound, adj);
+                dfs(u, visited, isAcron, isTree, adj);
         }
     }
 
@@ -36,12 +36,12 @@ public:
         int cntTree = 0, cntAcron = 0;
         for (int i = 65; i < 91; i++) {
             bool isAcron = false;
-            bool hasFound = false;
+            bool isTree = false;
             if (visited[i] == false) {
-                dfs(i, visited, isAcron, hasFound, adj);
+                dfs(i, visited, isAcron, isTree, adj);
                 if (isAcron)
                     cntAcron++;
-                if (hasFound)
+                if (isTree)
                     cntTree++;
             }
         }
